@@ -30,7 +30,7 @@ public class Backtracking {
 
     private int[] buscaAux(No no){
         EstadoFinal estadoFinal = new EstadoFinal();
-        if(no.getNivel()< 10000){ //nivel máximo: 7356
+        if(no.getNivel()< 7767){ //nivel máximo: 7767
             if(!estadoFinal.getEstadoFinal(no.getTabuleiro())){
                 Regras regras = new Regras();
                 int [] tabuleiro = no.getTabuleiro();
@@ -89,7 +89,7 @@ public class Backtracking {
                 return no.getTabuleiro();
             }
         }else{
-            
+
             return null;
         }
     }
