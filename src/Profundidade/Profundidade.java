@@ -1,10 +1,14 @@
-package Largura;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Profundidade;
 
 /**
  *
  * @author pedro
  */
-public class Largura {
+public class Profundidade {
 
     private int getNivelEsq(No no){
         if(no.getEsq() != null){
@@ -36,7 +40,7 @@ public class Largura {
     }
     private No raiz;
 
-    Largura(){
+    Profundidade(){
         this.raiz = null;
     }
 
