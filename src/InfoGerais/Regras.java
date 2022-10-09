@@ -29,7 +29,7 @@ public class Regras {
         for(int i = 0; i < tabuleiro.length; i++){
             if(tabuleiro[i] == 11 &&
                     tabuleiro[getRegraDir(i)] == 0 &&
-                    (esFinal.getEstadoFinal11(i) != true)){
+                    (!esFinal.getEstadoFinal11(i))){
                 tabuleiro[getRegraDir(i)] = tabuleiro[i];
                 tabuleiro[i] = 0;
                 return true;
@@ -43,7 +43,7 @@ public class Regras {
         for(int i = 0; i < tabuleiro.length; i++){
             if(tabuleiro[i] == 12 &&
                     tabuleiro[getRegraDir(i)] == 0 &&
-                    (esFinal.getEstadoFinal12(i) != true)){
+                    (!esFinal.getEstadoFinal12(i))){
                 tabuleiro[getRegraDir(i)] = tabuleiro[i];
                 tabuleiro[i] = 0;
                 return true;
@@ -57,7 +57,7 @@ public class Regras {
         for(int i = 0; i < tabuleiro.length; i++){
             if(tabuleiro[i] == 21 &&
                     tabuleiro[getRegraDir(i)] == 0 &&
-                    (esFinal.getEstadoFinal21(i) != true)){
+                    (!esFinal.getEstadoFinal21(i))){
                 tabuleiro[getRegraDir(i)] = tabuleiro[i];
                 tabuleiro[i] = 0;
                 return true;
@@ -71,7 +71,7 @@ public class Regras {
         for(int i = 0; i < tabuleiro.length; i++){
             if(tabuleiro[i] == 22 &&
                     tabuleiro[getRegraDir(i)] == 0 &&
-                    (esFinal.getEstadoFinal22(i) != true)){
+                    (!esFinal.getEstadoFinal22(i))){
                 tabuleiro[getRegraDir(i)] = tabuleiro[i];
                 tabuleiro[i] = 0;
                 return true;

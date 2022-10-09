@@ -16,6 +16,10 @@ public class Main {
         int[] estadoFinal = back.iniciaBusca(estadoInicial);
         if(estadoFinal == null){
             System.out.print("Estado não encontrado");
+        }else{
+            for (int j : estadoFinal) {
+                System.out.print(j + " ");
+            }
         }
 
     }
