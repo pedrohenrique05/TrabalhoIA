@@ -27,7 +27,36 @@ public class Backtracking {
         this.raiz = new No(0,tabuleiro);
         return buscaAux(this.raiz);
     }
-
+    private int[] buscaAux(No no){
+        EstadoFinal estadoFinal = new EstadoFinal();
+        if(!estadoFinal.getEstadoFinal(no.getTabuleiro())){
+            Regras reg = new Regras();
+            int[] tabuleiroAux = no.getTabuleiro();
+            if(reg.getRegraUm(tabuleiroAux)){
+                No novoNo = new No(no.getNivel()+1,tabuleiroAux);
+                no.setProx(novoNo);
+                buscaAux(no.getProx());
+            }else if(reg.getRegraDois(tabuleiroAux)){
+                No novoNo = new No(no.getNivel()+1,tabuleiroAux);
+                no.setProx(novoNo);
+                buscaAux(no.getProx());
+            }else if(reg.getRegraTres(tabuleiroAux)){
+                No novoNo = new No(no.getNivel()+1,tabuleiroAux);
+                no.setProx(novoNo);
+                buscaAux(no.getProx());
+            }else if(reg.getRegraQuatro(tabuleiroAux)){
+                No novoNo = new No(no.getNivel()+1,tabuleiroAux);
+                no.setProx(novoNo);
+                buscaAux(no.getProx());
+            }else{
+                return null;
+            }
+        }else{
+            return no.getTabuleiro();
+        }
+        return null;
+    }
+    /**
     private int[] buscaAux(No no){
         EstadoFinal estadoFinal = new EstadoFinal();
         if(no.getNivel()< 7767){ //nivel máximo: 7767
@@ -93,4 +122,5 @@ public class Backtracking {
             return null;
         }
     }
+     **/
 }
