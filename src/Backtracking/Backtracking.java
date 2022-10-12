@@ -9,9 +9,13 @@ import InfoGerais.Regras;
  */
 public class Backtracking {
 
-    private int getNivel(No no){
+    public int getNivel(){
+        return getNivelAux(this.raiz);
+    }
+
+    private int getNivelAux(No no){
         if(no.getProx() != null){
-            return getNivel(no.getProx());
+            return getNivelAux(no.getProx());
         }else{
             return no.getNivel();
         }

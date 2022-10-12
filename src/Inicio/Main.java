@@ -21,6 +21,7 @@ public class Main {
                 System.out.print(j + " ");
             }
         }
+        System.out.println("\nNivel da busca: "+back.getNivel());
 
     }
 }
