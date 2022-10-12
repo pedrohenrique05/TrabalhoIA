@@ -20,6 +20,9 @@ public class Backtracking {
             return no.getNivel();
         }
     }
+    public int[] getTabuleiroRaiz(){
+        return this.raiz.getTabuleiro();
+    }
 
     private No raiz;
 
@@ -35,7 +38,7 @@ public class Backtracking {
         EstadoFinal estadoFinal = new EstadoFinal();
         if(!estadoFinal.getEstadoFinal(no.getTabuleiro())){
             Regras reg = new Regras();
-            int[] tabuleiroAux = no.getTabuleiro();
+            int[] tabuleiroAux = no.getTabuleiro().clone();
             if(reg.getRegraUm(tabuleiroAux) && no.getRegraImpasse() != 1){
                 No novoNo = new No(no.getNivel()+1,tabuleiroAux,0);
                 no.setRegraAtual(1);
@@ -47,19 +50,19 @@ public class Backtracking {
                 no.setRegraAtual(2);
                 no.setProx(novoNo);
                 novoNo.setNoAnterior(no);
-                return buscaAux(no.getProx());
+                return buscaAux(novoNo);
             }else if(reg.getRegraTres(tabuleiroAux) && no.getRegraImpasse() != 3){
                 No novoNo = new No(no.getNivel()+1,tabuleiroAux,0);
                 no.setRegraAtual(3);
                 no.setProx(novoNo);
                 novoNo.setNoAnterior(no);
-                return buscaAux(no.getProx());
+                return buscaAux(novoNo);
             }else if(reg.getRegraQuatro(tabuleiroAux) && no.getRegraImpasse() != 4){
                 No novoNo = new No(no.getNivel()+1,tabuleiroAux,0);
                 no.setRegraAtual(4);
                 no.setProx(novoNo);
                 novoNo.setNoAnterior(no);
-                return buscaAux(no.getProx());
+                return buscaAux(novoNo);
             }else{
                 No aux = no.getNoAnterior();
                 aux.setRegraImpasse(no.getRegraAtual());

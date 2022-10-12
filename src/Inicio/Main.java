@@ -3,6 +3,8 @@ package Inicio;
 
 import Backtracking.Backtracking;
 
+import java.util.Arrays;
+
 /**
  *
  * @author pedro
@@ -14,14 +16,9 @@ public class Main {
         Backtracking back = new Backtracking();
         int[] estadoInicial = {11,0,12,0,21,0,22,0};
         int[] estadoFinal = back.iniciaBusca(estadoInicial);
-        if(estadoFinal == null){
-            System.out.print("Estado não encontrado");
-        }else{
-            for (int j : estadoFinal) {
-                System.out.print(j + " ");
-            }
-        }
-        System.out.println("\nNivel da busca: "+back.getNivel());
+        System.out.print("Tabuleiro inicial: "+Arrays.toString(back.getTabuleiroRaiz())+"\n");
+        System.out.print("Tabuleiro final:   "+Arrays.toString(estadoFinal)+"\n");
+        System.out.println("Nivel da busca:    "+back.getNivel());
 
     }
 }
