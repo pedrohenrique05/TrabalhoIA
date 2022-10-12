@@ -24,7 +24,7 @@ public class Backtracking {
     }
 
     public int[] iniciaBusca(int[] tabuleiro){
-        this.raiz = new No(0,tabuleiro);
+        this.raiz = new No(0,tabuleiro,0);
         return buscaAux(this.raiz);
     }
     private int[] buscaAux(No no){
@@ -32,26 +32,37 @@ public class Backtracking {
         if(!estadoFinal.getEstadoFinal(no.getTabuleiro())){
             Regras reg = new Regras();
             int[] tabuleiroAux = no.getTabuleiro();
-            if(reg.getRegraUm(tabuleiroAux)){
-                No novoNo = new No(no.getNivel()+1,tabuleiroAux);
+            if(reg.getRegraUm(tabuleiroAux) && no.getRegraImpasse() != 1){
+                No novoNo = new No(no.getNivel()+1,tabuleiroAux,0);
+                no.setRegraAtual(1);
                 no.setProx(novoNo);
-                return buscaAux(no.getProx());
-            }else if(reg.getRegraDois(tabuleiroAux)){
-                No novoNo = new No(no.getNivel()+1,tabuleiroAux);
+                novoNo.setNoAnterior(no);
+                return buscaAux(novoNo);
+            }else if(reg.getRegraDois(tabuleiroAux) && no.getRegraImpasse() != 2 ){
+                No novoNo = new No(no.getNivel()+1,tabuleiroAux,0);
+                no.setRegraAtual(2);
                 no.setProx(novoNo);
+                novoNo.setNoAnterior(no);
                 return buscaAux(no.getProx());
-            }else if(reg.getRegraTres(tabuleiroAux)){
-                No novoNo = new No(no.getNivel()+1,tabuleiroAux);
+            }else if(reg.getRegraTres(tabuleiroAux) && no.getRegraImpasse() != 3){
+                No novoNo = new No(no.getNivel()+1,tabuleiroAux,0);
+                no.setRegraAtual(3);
                 no.setProx(novoNo);
+                novoNo.setNoAnterior(no);
                 return buscaAux(no.getProx());
-            }else if(reg.getRegraQuatro(tabuleiroAux)){
-                No novoNo = new No(no.getNivel()+1,tabuleiroAux);
+            }else if(reg.getRegraQuatro(tabuleiroAux) && no.getRegraImpasse() != 4){
+                No novoNo = new No(no.getNivel()+1,tabuleiroAux,0);
+                no.setRegraAtual(4);
                 no.setProx(novoNo);
+                novoNo.setNoAnterior(no);
                 return buscaAux(no.getProx());
+            }else{
+                No aux = no.getNoAnterior();
+                aux.setRegraImpasse(no.getRegraAtual());
+                return buscaAux(no.getNoAnterior());
             }
         }else{
             return no.getTabuleiro();
         }
-        return no.getTabuleiro();
     }
 }

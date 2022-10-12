@@ -1,45 +1,29 @@
 package InfoGerais;
 
+import java.util.Arrays;
+
 /**
  *
  * @author pedro
  */
 public class EstadoFinal {
-    private final int[] estFinal;
+    private final int[] estFinal = {21, 0, 22, 0, 11, 0, 12, 0};
 
-    {
-        estFinal = new int[]{21, 0, 22, 0, 11, 0, 12, 0};
-    }
+
 
     public boolean getEstadoFinal11(int indice){
-        if(indice == 4)
-            return true;
-        else {
-            return false;
-        }
+        return indice == 4;
     }
     public boolean getEstadoFinal12(int indice){
-        if(indice == 6)
-            return true;
-        else {
-            return false;
-        }
+        return indice == 6;
     }
     public boolean getEstadoFinal21(int indice){
-        if(indice == 0)
-            return true;
-        else {
-            return false;
-        }
+        return indice == 0;
     }
     public boolean getEstadoFinal22(int indice){
-        if(indice == 2)
-            return true;
-        else {
-            return false;
-        }
+        return indice == 2;
     }
     public boolean getEstadoFinal(int[] tabuleiro){
-        return tabuleiro == this.estFinal;
+        return Arrays.equals(tabuleiro, this.estFinal);
     }
 }
