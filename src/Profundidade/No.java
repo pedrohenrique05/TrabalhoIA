@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Profundidade;
 
 /**
@@ -10,40 +6,36 @@ package Profundidade;
  */
 public class No {
 
-    private No esq;
-    private No dir;
-    public int chave;
-    private int nivel;
+    private No proxNo;
+    private No noAnterior;
+    private final int nivel;
+    private final int[] tabuleiro;
 
-    public No(int chave, int nivel){
-        this.chave = chave;
-        this.esq = null;
-        this.dir = null;
+    public No(int nivel,int[] tabuleiro){
+        this.proxNo = null;
         this.nivel = nivel;
+        this.tabuleiro = tabuleiro;
+        this.noAnterior = null;
     }
 
-    public int getChave(){
-        return this.chave;
+    public void setProx(No no){
+        this.proxNo = no;
     }
 
-    public void setEsq(No no){
-        this.esq = no;
+    public No getProx(){
+        return this.proxNo;
     }
 
-    public void setDir(No no){
-        this.dir = no;
-    }
+    public void setNoAnterior(No no){ this.noAnterior = no;}
 
-    public No getEsq(){
-        return this.esq;
-    }
-
-    public No getDir(){
-        return this.dir;
-    }
+    public No getNoAnterior(){ return this.noAnterior;}
 
     public int getNivel(){
         return this.nivel;
+    }
+
+    public int[] getTabuleiro(){
+        return this.tabuleiro;
     }
 
 }

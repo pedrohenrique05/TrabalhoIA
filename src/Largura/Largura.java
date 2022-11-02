@@ -39,19 +39,6 @@ public class Largura {
     }
 
     /**
-     * Auxilia a função principal a retorna o nível da arvore de busca de forma recursiva.
-     * @param no
-     * @return
-     */
-    private int getNivelAux(No no){
-        if(no.getProx() != null){
-            return getNivelAux(no.getProx());
-        }else{
-            return no.getNivel();
-        }
-    }
-
-    /**
      * Seta o No que acabou se ser criado na lista de aberto.
      * @param no
      */
@@ -106,7 +93,7 @@ public class Largura {
      */
     private int[] buscaLargura(No no, int interacao) {
         EstadoFinal estadoFinal = new EstadoFinal();
-      //  if(interacao < 5799){
+        if(interacao < 4000){
             if(!estadoFinal.getEstadoFinal(no.getTabuleiro())){
                 int[] tabuleiroAux = no.getTabuleiro().clone();
                 Regras reg = new Regras();
@@ -137,14 +124,15 @@ public class Largura {
                     novoNo.setNoAnterior(no);
                     setListaNoAberto(novoNo);
                 }
+                tabuleiroAux = null;
                 setListaNoFechado(getPrimeiroNoAberto());
                 return buscaLargura(getProximoNoAberto(),interacao+1);
             }else{
                 return no.getTabuleiro();
             }
-        //}else{
-        //    return no.getTabuleiro();
-        //}
+        }else{
+            return no.getTabuleiro();
+        }
 
     }
 }

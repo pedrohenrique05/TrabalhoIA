@@ -9,8 +9,6 @@ import java.util.Arrays;
 public class EstadoFinal {
     private final int[] estFinal = {21, 0, 22, 0, 11, 0, 12, 0};
 
-
-
     public boolean getEstadoFinal11(int indice){
         return indice == 4;
     }
@@ -23,6 +21,7 @@ public class EstadoFinal {
     public boolean getEstadoFinal22(int indice){
         return indice == 2;
     }
+
     public boolean getEstadoFinal(int[] tabuleiro){
         return Arrays.equals(tabuleiro, this.estFinal);
     }
