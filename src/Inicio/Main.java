@@ -20,6 +20,7 @@ public class Main {
         /**
          * execução da busca backtracking
          */
+
         System.out.println("Execução da busca backtracking");
         Backtracking back = new Backtracking();
         estadoFinal =  back.iniciaBusca(estadoInicial);
@@ -27,17 +28,16 @@ public class Main {
         System.out.print("Tabuleiro final:   "+Arrays.toString(estadoFinal)+"\n");
         System.out.println("Nivel da busca:    "+back.getNivel());
 
-
         /**
          * execução da busca em largura
          */
+
         System.out.println("Execução da busca em largura");
         Largura largura = new Largura();
         estadoFinal = largura.iniciaBusca(estadoInicial);
         System.out.print("Tabuleiro inicial: "+Arrays.toString(largura.getTabuleiroRaiz())+"\n");
         System.out.print("Tabuleiro final:   "+Arrays.toString(estadoFinal)+"\n");
         System.out.println("Nivel da busca:    "+largura.getNivel());
-
 
         /**
          * execução da busca em profundidade
