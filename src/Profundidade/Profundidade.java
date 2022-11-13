@@ -79,7 +79,10 @@ public class Profundidade {
         if(this.raiz == null){
             No no = new No(0,tabuleiro);
             setPilhaNoAberto(no);
-            return buscaProfundidade(no);
+            EstadoFinal estadoFinal = new EstadoFinal();
+            Regras reg = new Regras();
+            int[] tabuleiroAux = null;
+            return buscaProfundidade(no,estadoFinal,reg,tabuleiroAux,0);
         }else{
             System.out.println("Busca já realizada!");
             return null;
@@ -91,51 +94,48 @@ public class Profundidade {
      * @param no
      * @return
      */
-    private int[] buscaProfundidade(No no) {
-        EstadoFinal estadoFinal = new EstadoFinal();
-
-        if(!estadoFinal.getEstadoFinal(no.getTabuleiro())){
-            int[] tabuleiroAux = no.getTabuleiro().clone();
-            Regras reg = new Regras();
-            if(reg.getRegraUm(tabuleiroAux)) {
-                No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
-                no.setProx(novoNo);
-                novoNo.setNoAnterior(no);
-                setPilhaNoFechado(getPrimeiroNoAberto());
-                setPilhaNoAberto(novoNo);
+    private int[] buscaProfundidade(No no,EstadoFinal estadoFinal, Regras reg, int [] tabuleiroAux,int interacao) {
+        if(interacao < 1){
+            if(!estadoFinal.getEstadoFinal(no.getTabuleiro())){
+                tabuleiroAux = no.getTabuleiro().clone();
+                if(reg.getRegraUm(tabuleiroAux)) {
+                    No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
+                    no.setNoFilho(novoNo);
+                    novoNo.setNoAnterior(no);
+                    setPilhaNoAberto(novoNo);
+                }
+                tabuleiroAux = no.getTabuleiro().clone();
+                if(reg.getRegraDois(tabuleiroAux)) {
+                    No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
+                    no.setNoFilho(novoNo);
+                    novoNo.setNoAnterior(no);
+                    setPilhaNoAberto(novoNo);
+                }
+                tabuleiroAux = no.getTabuleiro().clone();
+                if(reg.getRegraTres(tabuleiroAux)) {
+                    No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
+                    no.setNoFilho(novoNo);
+                    novoNo.setNoAnterior(no);
+                    setPilhaNoAberto(novoNo);
+                }
+                tabuleiroAux = no.getTabuleiro().clone();
+                if(reg.getRegraQuatro(tabuleiroAux)) {
+                    No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
+                    no.setNoFilho(novoNo);
+                    novoNo.setNoAnterior(no);
+                    setPilhaNoAberto(novoNo);
+                }
                 tabuleiroAux = null;
-                return buscaProfundidade(getProximoNoAberto());
-            }else if(reg.getRegraDois(tabuleiroAux)) {
-                No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
-                no.setProx(novoNo);
-                novoNo.setNoAnterior(no);
+                no.setExplorado();
                 setPilhaNoFechado(getPrimeiroNoAberto());
-                setPilhaNoAberto(novoNo);
-                tabuleiroAux = null;
-                return buscaProfundidade(getProximoNoAberto());
-            }else if(reg.getRegraTres(tabuleiroAux)) {
-                No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
-                no.setProx(novoNo);
-                novoNo.setNoAnterior(no);
-                setPilhaNoFechado(getPrimeiroNoAberto());
-                setPilhaNoAberto(novoNo);
-                tabuleiroAux = null;
-                return buscaProfundidade(getProximoNoAberto());
-            }else if(reg.getRegraQuatro(tabuleiroAux)) {
-                No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
-                no.setProx(novoNo);
-                novoNo.setNoAnterior(no);
-                setPilhaNoFechado(getPrimeiroNoAberto());
-                setPilhaNoAberto(novoNo);
-                tabuleiroAux = null;
-                return buscaProfundidade(getProximoNoAberto());
+                return buscaProfundidade(getProximoNoAberto(),estadoFinal,reg, null,interacao+1);
             }else{
-                System.out.println("Solução não encontrada!");
-                return null;
+                setPilhaNoFechado(getPrimeiroNoAberto());
+                return no.getTabuleiro();
             }
         }else{
-            setPilhaNoFechado(getPrimeiroNoAberto());
             return no.getTabuleiro();
         }
+
     }
 }
