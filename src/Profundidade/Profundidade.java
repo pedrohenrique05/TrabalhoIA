@@ -9,11 +9,15 @@ import InfoGerais.Regras;
  * @author pedro
  */
 public class Profundidade {
+    private EstadoFinal estadoFinal;
+    private Regras reg;
     private No raiz;
     private Stack<No> pilhaNosAberto = new Stack<>();
     private Stack<No> pilhaNosFechado = new Stack<>();
 
     public Profundidade(){
+        this.reg = new Regras();
+        this.estadoFinal = new EstadoFinal();
         this.raiz = null;
     }
 
@@ -79,10 +83,8 @@ public class Profundidade {
         if(this.raiz == null){
             No no = new No(0,tabuleiro);
             setPilhaNoAberto(no);
-            EstadoFinal estadoFinal = new EstadoFinal();
-            Regras reg = new Regras();
             int[] tabuleiroAux = null;
-            return buscaProfundidade(no,estadoFinal,reg,tabuleiroAux,0);
+            return buscaProfundidade(no,tabuleiroAux,0);
         }else{
             System.out.println("Busca já realizada!");
             return null;
@@ -94,32 +96,32 @@ public class Profundidade {
      * @param no
      * @return
      */
-    private int[] buscaProfundidade(No no,EstadoFinal estadoFinal, Regras reg, int [] tabuleiroAux,int interacao) {
+    private int[] buscaProfundidade(No no, int [] tabuleiroAux,int interacao) {
         if(interacao < 1){
-            if(!estadoFinal.getEstadoFinal(no.getTabuleiro())){
+            if(!this.estadoFinal.getEstadoFinal(no.getTabuleiro())){
                 tabuleiroAux = no.getTabuleiro().clone();
-                if(reg.getRegraUm(tabuleiroAux)) {
+                if(this.reg.getRegraUm(tabuleiroAux)) {
                     No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
                     no.setNoFilho(novoNo);
                     novoNo.setNoAnterior(no);
                     setPilhaNoAberto(novoNo);
                 }
                 tabuleiroAux = no.getTabuleiro().clone();
-                if(reg.getRegraDois(tabuleiroAux)) {
+                if(this.reg.getRegraDois(tabuleiroAux)) {
                     No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
                     no.setNoFilho(novoNo);
                     novoNo.setNoAnterior(no);
                     setPilhaNoAberto(novoNo);
                 }
                 tabuleiroAux = no.getTabuleiro().clone();
-                if(reg.getRegraTres(tabuleiroAux)) {
+                if(this.reg.getRegraTres(tabuleiroAux)) {
                     No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
                     no.setNoFilho(novoNo);
                     novoNo.setNoAnterior(no);
                     setPilhaNoAberto(novoNo);
                 }
                 tabuleiroAux = no.getTabuleiro().clone();
-                if(reg.getRegraQuatro(tabuleiroAux)) {
+                if(this.reg.getRegraQuatro(tabuleiroAux)) {
                     No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
                     no.setNoFilho(novoNo);
                     novoNo.setNoAnterior(no);
@@ -128,7 +130,7 @@ public class Profundidade {
                 tabuleiroAux = null;
                 no.setExplorado();
                 setPilhaNoFechado(getPrimeiroNoAberto());
-                return buscaProfundidade(getProximoNoAberto(),estadoFinal,reg, null,interacao+1);
+                return buscaProfundidade(getProximoNoAberto(), null,interacao+1);
             }else{
                 setPilhaNoFechado(getPrimeiroNoAberto());
                 return no.getTabuleiro();

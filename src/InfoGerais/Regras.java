@@ -16,6 +16,8 @@ package InfoGerais;
  */
 public class Regras {
 
+    public Regras(){
+    }
     public int getRegraDir(int indice){
         return ((indice+3)%8+8)%8;
     }
@@ -25,11 +27,9 @@ public class Regras {
     }
 
     public boolean getRegraUm(int [] tabuleiro){
-        EstadoFinal esFinal = new EstadoFinal();
+
         for(int i = 0; i < tabuleiro.length; i++){
-            if(tabuleiro[i] == 11 &&
-                    tabuleiro[getRegraDir(i)] == 0 &&
-                    (!esFinal.getEstadoFinal11(i))){
+            if(i != 4 && tabuleiro[i] == 11 && tabuleiro[getRegraDir(i)] == 0){
                 tabuleiro[getRegraDir(i)] = tabuleiro[i];
                 tabuleiro[i] = 0;
                 return true;
@@ -39,11 +39,9 @@ public class Regras {
     }
 
     public boolean getRegraDois(int [] tabuleiro){
-        EstadoFinal esFinal = new EstadoFinal();
         for(int i = 0; i < tabuleiro.length; i++){
-            if(tabuleiro[i] == 12 &&
-                    tabuleiro[getRegraDir(i)] == 0 &&
-                    (!esFinal.getEstadoFinal12(i))){
+            if( i != 6 && tabuleiro[i] == 12 &&
+                    tabuleiro[getRegraDir(i)] == 0){
                 tabuleiro[getRegraDir(i)] = tabuleiro[i];
                 tabuleiro[i] = 0;
                 return true;
@@ -53,11 +51,8 @@ public class Regras {
     }
 
     public boolean getRegraTres(int [] tabuleiro){
-        EstadoFinal esFinal = new EstadoFinal();
         for(int i = 0; i < tabuleiro.length; i++){
-            if(tabuleiro[i] == 21 &&
-                    tabuleiro[getRegraDir(i)] == 0 &&
-                    (!esFinal.getEstadoFinal21(i))){
+            if((i != 0) && tabuleiro[i] == 21 && tabuleiro[getRegraDir(i)] == 0){
                 tabuleiro[getRegraDir(i)] = tabuleiro[i];
                 tabuleiro[i] = 0;
                 return true;
@@ -67,11 +62,8 @@ public class Regras {
     }
 
     public boolean getRegraQuatro(int [] tabuleiro){
-        EstadoFinal esFinal = new EstadoFinal();
         for(int i = 0; i < tabuleiro.length; i++){
-            if(tabuleiro[i] == 22 &&
-                    tabuleiro[getRegraDir(i)] == 0 &&
-                    (!esFinal.getEstadoFinal22(i))){
+            if( i != 2 && tabuleiro[i] == 22 && tabuleiro[getRegraDir(i)] == 0){
                 tabuleiro[getRegraDir(i)] = tabuleiro[i];
                 tabuleiro[i] = 0;
                 return true;

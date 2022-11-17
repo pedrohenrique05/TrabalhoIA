@@ -11,7 +11,7 @@ public class No {
     @Override
     public boolean equals(Object obj){
         No outro = (No) obj;
-        return this.tabuleiro.equals(((No) obj).tabuleiro);
+        return this.tabuleiro.equals(((No) obj).getTabuleiro());
     }
 
     @Override
@@ -22,8 +22,8 @@ public class No {
         return result;
     }
     private boolean solucao;
-    private boolean explorado;
-    private ArrayList<No> nosFilhos = new ArrayList();
+//    private boolean explorado;
+    private ArrayList<No> nosFilhos;
     private No noAnterior;
     private final int nivel;
     private final int[] tabuleiro;
@@ -32,14 +32,16 @@ public class No {
         this.nivel = nivel;
         this.tabuleiro = tabuleiro;
         this.noAnterior = null;
-        this.explorado = false;
+//        this.explorado = false;
         this.solucao = false;
+        this.nosFilhos = new ArrayList();
     }
 
     public void setNoFilho(No no){
         this.nosFilhos.add(no);
     }
 
+    /**
     public No getNoFilho(){
         for(int i = 0; i < this.nosFilhos.size(); i++){
             if(!this.nosFilhos.get(i).getNoExplorado()){
@@ -47,17 +49,17 @@ public class No {
             }
         }
         return null;
-    }
+    }*/
 
     public ArrayList<No> getNosFilhos(){
         return this.nosFilhos;
     }
-    public void setNoExplorado(){
+/**    public void setNoExplorado(){
         this.explorado = true;
     }
     public boolean getNoExplorado(){
         return this.explorado;
-    }
+    }*/
     public void setNoSolucao(){ this.solucao = true;}
     public boolean getNoSolucao(){return this.solucao;}
     public void setNoAnterior(No no){ this.noAnterior = no;}

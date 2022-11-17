@@ -124,7 +124,7 @@ public class LarguraArrayList{
      * @return
      */
     private No buscaLargura(No no, int interacao,EstadoFinal estadoFinal,Regras reg,int [] tabuleiroAux) {
-        if(interacao < 300){
+        if(interacao < 100){
             if (!estadoFinal.getEstadoFinal(no.getTabuleiro())) {
                 tabuleiroAux = no.getTabuleiro().clone();
                 if (reg.getRegraUm(tabuleiroAux)) {
@@ -171,7 +171,7 @@ public class LarguraArrayList{
                     }
                 }
                 tabuleiroAux = null;
-                no.setNoExplorado();
+                //no.setNoExplorado();
                 setListaNoFechado(getPrimeiroNoAberto());
                 return buscaLargura(getProximoNoAberto(), interacao + 1, estadoFinal, reg, tabuleiroAux);
             } else {

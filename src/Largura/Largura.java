@@ -35,13 +35,16 @@ public class Largura {
             }
         }
     }
-
+    private EstadoFinal estadoFinal;
+    private Regras reg = new Regras();
     private No noSolucao;
     private No raiz;
     private Queue<No> filaNosAberto = new LinkedList<>();
     private Queue<No> filaNosFechado = new LinkedList<>();
 
     public Largura(){
+        this.estadoFinal = new EstadoFinal();
+        this.reg = new Regras();
         this.noSolucao = null;
         this.raiz = null;
     }
@@ -109,12 +112,9 @@ public class Largura {
      */
     public void iniciaBusca(int [] tabuleiro){
         if(this.raiz == null){
-            EstadoFinal estadoFinal = new EstadoFinal();
-            Regras reg = new Regras();
-            int[] tabuleiroAux = null;
             No no = new No(0,tabuleiro);
             setListaNoAberto(no);
-            this.noSolucao =  buscaLargura(no,0,estadoFinal,reg,tabuleiroAux);
+            this.noSolucao =  buscaLargura(no,0,null);
             marcaNoSolucao(this.noSolucao);
         }else{
             System.out.println("Busca já realizada!");
@@ -126,42 +126,42 @@ public class Largura {
      * @param no
      * @return
      */
-    private No buscaLargura(No no, int interacao,EstadoFinal estadoFinal,Regras reg,int[] tabuleiroAux) {
+    private No buscaLargura(No no, int interacao,int[] tabuleiroAux) {
 
-        if(interacao < 300){
-            if(!estadoFinal.getEstadoFinal(no.getTabuleiro())){
+        if(interacao < 2505){
+            if(!this.estadoFinal.getEstadoFinal(no.getTabuleiro())){
                 tabuleiroAux = no.getTabuleiro().clone();
-                if(reg.getRegraUm(tabuleiroAux)) {
+                if(this.reg.getRegraUm(tabuleiroAux)) {
                     No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
                     no.setNoFilho(novoNo);
                     novoNo.setNoAnterior(no);
                     setListaNoAberto(novoNo);
                 }
                 tabuleiroAux = no.getTabuleiro().clone();
-                if(reg.getRegraDois(tabuleiroAux)) {
+                if(this.reg.getRegraDois(tabuleiroAux)) {
                     No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
                     no.setNoFilho(novoNo);
                     novoNo.setNoAnterior(no);
                     setListaNoAberto(novoNo);
                 }
                 tabuleiroAux = no.getTabuleiro().clone();
-                if(reg.getRegraTres(tabuleiroAux)) {
+                if(this.reg.getRegraTres(tabuleiroAux)) {
                     No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
                     no.setNoFilho(novoNo);
                     novoNo.setNoAnterior(no);
                     setListaNoAberto(novoNo);
                 }
                 tabuleiroAux = no.getTabuleiro().clone();
-                if(reg.getRegraQuatro(tabuleiroAux)) {
+                if(this.reg.getRegraQuatro(tabuleiroAux)) {
                     No novoNo = new No(no.getNivel() + 1, tabuleiroAux);
                     no.setNoFilho(novoNo);
                     novoNo.setNoAnterior(no);
                     setListaNoAberto(novoNo);
                 }
                 tabuleiroAux = null;
-                no.setNoExplorado();
+                //no.setNoExplorado();
                 setListaNoFechado(getPrimeiroNoAberto());
-                return buscaLargura(getProximoNoAberto(),interacao+1,estadoFinal,reg,tabuleiroAux);
+                return buscaLargura(getProximoNoAberto(),interacao+1,null);
             }else{
                 setListaNoFechado(no);
                 return no;
