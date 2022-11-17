@@ -83,8 +83,7 @@ public class Profundidade {
         if(this.raiz == null){
             No no = new No(0,tabuleiro);
             setPilhaNoAberto(no);
-            int[] tabuleiroAux = null;
-            return buscaProfundidade(no,tabuleiroAux,0);
+            return buscaProfundidade(no,null,0);
         }else{
             System.out.println("Busca já realizada!");
             return null;
@@ -97,7 +96,7 @@ public class Profundidade {
      * @return
      */
     private int[] buscaProfundidade(No no, int [] tabuleiroAux,int interacao) {
-        if(interacao < 1){
+        if(interacao < 2505){
             if(!this.estadoFinal.getEstadoFinal(no.getTabuleiro())){
                 tabuleiroAux = no.getTabuleiro().clone();
                 if(this.reg.getRegraUm(tabuleiroAux)) {
